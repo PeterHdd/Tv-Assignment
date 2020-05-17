@@ -1,0 +1,37 @@
+<mat-form-field class="example-full-width">
+    <mat-label>Tv Show Title </mat-label>
+    <input (change)="searchByName($event)" type="text" matInput placeholder="search by title">
+    <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+<div *ngIf="!search">
+    <mat-grid-list [cols]="breakpoint" rowHeight="350px" [gutterSize]="'7px'" (window:resize)="onResize($event)">
+        <mat-grid-tile *ngFor="let res of tvResults">
+            <figure>
+                <img src="{{res.image.medium}}" alt="{{res.image.medium}}" (click)="openDetails(res)"
+                    style="cursor: pointer;">
+                <figcaption class="img-display">
+                    <b>{{res.name}}</b><span> &nbsp;- {{res.rating.average}}</span>
+                    <br>
+                    {{res.premiered}}
+                </figcaption>
+            </figure>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<div *ngIf="search">
+    <mat-grid-list [cols]="breakpoint" rowHeight="350px" [gutterSize]="'7px'" (window:resize)="onResize($event)">
+        <mat-grid-tile *ngFor="let res of tvResults">
+            <figure>
+                <div *ngIf="res.show.image != null">
+                    <img src="{{res.show.image.medium}}" alt="{{res.show.image.medium}}" (click)="openDetails(res)"
+                        style="cursor: pointer;">
+                </div>
+                <figcaption class="img-display">
+                    <b>{{res.show.name}}</b><span> &nbsp;- {{res.show.rating.average}}</span>
+                    <br>
+                    {{res.show.premiered}}
+                </figcaption>
+            </figure>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

@@ -1,0 +1,62 @@
+<div *ngIf="data.tvDetails.name != null">
+<h1 mat-dialog-title>{{data.tvDetails.name}}</h1>
+</div>
+<div *ngIf="data.tvDetails.name == null">
+    <h1 mat-dialog-title>{{data.tvDetails.show.name}}</h1>
+    </div>
+ <div *ngIf="data.tvDetails.premiered == null">
+    <label><b>Year :</b> &nbsp;<span>{{data.tvDetails.show.premiered}}</span></label>
+    </div>
+    <div *ngIf="data.tvDetails.premiered != null">
+    <label ><b>Year :</b> &nbsp;<span>{{data.tvDetails.premiered}}</span></label>
+    </div>
+<div mat-dialog-content>
+    <hr>
+    <h2>Crew</h2>
+    <table *ngIf="data.crew.length !== 0" mat-table [dataSource]="data.crew" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.person.name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="gender">
+          <th mat-header-cell *matHeaderCellDef> Gender </th>
+          <td mat-cell *matCellDef="let element"> {{element.person.gender}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef> Type </th>
+          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="crewDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: crewDisplayedColumns;"></tr>
+      </table>
+      <div *ngIf="data.crew.length === 0">
+        No Records Found!
+        </div>
+      <hr>
+      <h2>Cast</h2>
+      <table *ngIf="data.cast.length !== 0" mat-table [dataSource]="data.cast" class="mat-elevation-z8">
+        <ng-container matColumnDef="charName">
+          <th mat-header-cell *matHeaderCellDef> Character Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.character.name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="realName">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.person.name}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="birthday">
+          <th mat-header-cell *matHeaderCellDef> Birthday </th>
+          <td mat-cell *matCellDef="let element"> {{element.person.birthday}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="castDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: castDisplayedColumns;"></tr>
+      </table>
+      <div *ngIf="data.cast.length === 0">
+        No Records Found!
+        </div>
+</div>
